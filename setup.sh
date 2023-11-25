@@ -65,6 +65,9 @@ function create_user()
 
 }
 
+echo "Hostname: "
+read hostname
+hostnamectl set-hostname $hostname
 
 #Install docker
 if [ ! -z "$is_ubuntu" ]; then
@@ -136,7 +139,7 @@ sudo docker run -d \
     --path.rootfs /rootfs \
     --path.sysfs /host/sys \
     --collector.filesystem.mount-points-exclude "^/(sys|proc|dev|host|etc)($$|/)"
-		 
+
 sudo docker run \
   --volume=/:/rootfs:ro \
   --volume=/var/run:/var/run:ro \
@@ -150,6 +153,13 @@ sudo docker run \
   --privileged \
   --device=/dev/kmsg \
   gcr.io/cadvisor/cadvisor:latest
+
+sudo docker run -d \
+  --name container-exporter \
+  -v "/var/run/docker.sock:/var/run/docker.sock" \
+  -p 19094:19092 \
+  nguyenngochuy/container_exporter \
+  -listen-address=:19092
 }
 
 function setupSSHkey(){
