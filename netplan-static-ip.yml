@@ -3,8 +3,8 @@ network:
     ens160:
       dhcp4: no
       addresses:
-        - 10.0.0.131/24
-      gateway4: 10.0.0.1
+        - 192.168.1.98/24
+      gateway4: 192.168.1.1
       nameservers:
           addresses: [8.8.8.8, 8.8.4.4]
     ens192:
