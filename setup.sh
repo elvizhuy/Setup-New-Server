@@ -158,7 +158,7 @@ sudo docker run -d \
   --name container-exporter \
   -v "/var/run/docker.sock:/var/run/docker.sock" \
   -p 19094:19092 \
-  nguyenngochuy/container_exporter \
+  nguyenngochuy/container-exporter:v20.10.16 \
   -listen-address=:19092
 }
 
